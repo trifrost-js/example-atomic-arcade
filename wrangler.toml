@@ -8,5 +8,5 @@ directory = "./public/"
 binding = "ASSETS"
 
 [vars]
-TRIFROST_NAME="atomic-tetris"
+TRIFROST_NAME="atomic-arcade"
 TRIFROST_VERSION="0.1.0"

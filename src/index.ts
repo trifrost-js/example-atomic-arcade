@@ -1,4 +1,4 @@
-import { App, Security, Cors } from '@trifrost/core';
+import { App, Security, Cors, ConsoleExporter, JsonExporter, OtelHttpExporter, isDevMode } from '@trifrost/core';
 import { css } from './css';
 import { script } from './script';
 import { type Env } from './types';
@@ -8,6 +8,21 @@ import { errorHandler } from './routes/error';
 
 const app = await new App<Env>({
   client: { css, script },
+  tracing: {
+    exporters: ({env}) => {
+      if (isDevMode(env)) return [new ConsoleExporter()];
+      return [
+        new JsonExporter(),
+        new OtelHttpExporter({
+          logEndpoint: 'https://otlp.uptrace.dev/v1/logs',
+          spanEndpoint: 'https://otlp.uptrace.dev/v1/traces',
+          headers: {
+            'uptrace-dsn': env.UPTRACE_DSN,
+          },
+        }),
+      ];
+    },
+  },
 })
   .use(
     Security({

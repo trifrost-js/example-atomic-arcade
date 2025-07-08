@@ -43,7 +43,7 @@ export function BreakoutGame() {
   const gameBoardId = css.cid();
 
   return (
-    <GameModal columns={BREAKOUT_CFG.COLS} rows={BREAKOUT_CFG.ROWS}>
+    <GameModal columns={BREAKOUT_CFG.COLS}>
       <GameConfig preview={PREVIEW} />
       <GameSidebar
         evtStart="breakout:start"

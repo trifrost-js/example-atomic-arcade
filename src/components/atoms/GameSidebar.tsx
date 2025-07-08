@@ -20,7 +20,7 @@ export function GameSidebar({
   return (
     <div className={cls}>
       {children}
-      <GameStartButton eventOver={evtEnd} eventStart={evtStart} timer={60} />
+      <GameStartButton eventOver={evtEnd} eventStart={evtStart} timer={60} style={{marginTop: 'calc(' + css.$v.spaceL + ' * 2)'}} />
     </div>
   );
 }

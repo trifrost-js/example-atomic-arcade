@@ -34,7 +34,7 @@ export type TetrisGameEvents = {
 
 export function TetrisGame() {
   return (
-    <GameModal columns={TETRIS_CFG.COLS} rows={TETRIS_CFG.ROWS} copyWidth={45}>
+    <GameModal columns={TETRIS_CFG.COLS} copyWidth={45}>
       <GameConfig preview={PREVIEW} />
       <GameSidebar evtStart="tetris:start" evtEnd="tetris:gameover" width={35}>
         <GameExplanation
@@ -118,8 +118,13 @@ export function TetrisGame() {
               render();
             }
 
-            function setTimer() {
+            function clearTimer() {
               if (tick) clearInterval(tick);
+              tick = null;
+            }
+
+            function setTimer() {
+              clearTimer();
               tick = setInterval(() => {
                 if (!isPaused) {
                   el.$publish('tetris:evt:move', 'down');
@@ -226,12 +231,9 @@ export function TetrisGame() {
 
             el.$subscribe('tetris:pause', () => (isPaused = !isPaused));
 
-            el.$subscribe('tetris:gameover', () => {
-              if (tick) clearInterval(tick);
-              tick = null;
-            });
+            el.$subscribe('tetris:gameover', () => clearTimer());
 
-            $.on(document, 'keydown', (e) => {
+            const keydownhandler = $.on(document, 'keydown', (e) => {
               if (isPaused || !tick) return;
               let dir: TetrisGameEvents['tetris:evt:move'] | null = null;
               switch (e.key) {
@@ -253,6 +255,11 @@ export function TetrisGame() {
               }
               if (dir) el.$publish('tetris:evt:move', dir);
             });
+
+            el.$unmount = () => {
+              keydownhandler();
+              clearTimer();
+            };
           }}
         </Script>
       </Game>

@@ -3,14 +3,12 @@ import { ModalClose } from '../modules/Modal';
 
 type GameModalOptions = {
   columns: number;
-  rows: number;
   copyWidth?: number;
   children: any;
 };
 
 export function GameModal({
   columns,
-  rows,
   copyWidth = 40,
   children,
 }: GameModalOptions) {
@@ -18,7 +16,6 @@ export function GameModal({
     <div
       className={css.use('f', 'fh', 'fj_sb', 'panel', {
         width: `calc(${columns * CFG.SIZE}px + ${copyWidth}rem)`,
-        height: `${rows * CFG.SIZE + 40}px`,
         position: 'relative',
         padding: css.$v.spaceL,
       })}

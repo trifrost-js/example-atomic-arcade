@@ -5,11 +5,19 @@ type GameStartButtonOptions = {
   timer: number;
   eventStart: keyof RelayEvents;
   eventOver: keyof RelayEvents;
+  style?: Record<string, unknown>;
 };
 
 export function GameStartButton(data: GameStartButtonOptions) {
   return (
-    <button type="button" className={css.use('button', { width: '100%' })}>
+    <button type="button" className={css.use('button', {
+      width: '100%',
+      [css.attr('data-hidden')]: {
+        visibility: 'hidden',
+        pointerEvents: 'none',
+        cursor: 'none',
+      },
+    }, data.style || {})}>
       Start Now (<span>{data.timer}</span>s)
       <Script data={data}>
         {({ el, data, $ }) => {
@@ -49,11 +57,10 @@ export function GameStartButton(data: GameStartButtonOptions) {
           el.$subscribe(data.eventOver, () => {
             $.clear(el);
             el.textContent = 'Play again?';
-            el.style.display = 'inline-block';
           });
 
           /* On game start, hide element */
-          el.$subscribe(data.eventStart, () => (el.style.display = 'none'));
+          el.$subscribe(data.eventStart, () => (el.setAttribute('data-hidden', '')));
 
           /* Start the clock on game boot */
           el.$subscribeOnce('game:evt:boot', setTimer);

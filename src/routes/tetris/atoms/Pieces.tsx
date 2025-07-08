@@ -34,6 +34,7 @@ export function Block({ color, matrix }: BlockOptions) {
       <Script data={{ x, y, matrix, color }}>
         {({ el, data, $ }) => {
           let { x, y } = data;
+          const { matrix } = data;
           let matrix_idx = 0;
           let isFirstCheck = true;
           const CELLS = $.queryAll(el, '[data-index]');

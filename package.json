@@ -1,0 +1,25 @@
+{
+  "name": "atomic-arcade",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
+    "lint": "./node_modules/.bin/eslint ./src",
+    "types": "tsc -p ./tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@trifrost/core": "^0.47.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250705.0",
+    "eslint": "^9",
+    "eslint-config-prettier": "^10",
+    "eslint-plugin-prettier": "^5",
+    "prettier": "^3",
+    "typescript": "^5",
+    "typescript-eslint": "^8",
+    "wrangler": "^4"
+  }
+}

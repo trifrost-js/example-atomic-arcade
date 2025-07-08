@@ -1,0 +1,12 @@
+name = "atomic-arcade"
+main = "src/index.ts"
+compatibility_date = "2025-05-08"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./public/"
+binding = "ASSETS"
+
+[vars]
+TRIFROST_NAME="atomic-tetris"
+TRIFROST_VERSION="0.1.0"

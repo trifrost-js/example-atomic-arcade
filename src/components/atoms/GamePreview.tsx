@@ -24,10 +24,13 @@ export function GamePreview({
     'f',
     'fv',
     'panel',
+    'outline',
     {
       padding: css.$v.spaceM,
+      textAlign: 'center',
+      cursor: 'crosshair',
       h2: css.mix('header', { marginBottom: css.$v.spaceM }),
-      p: css.mix('body', 'fg', { marginBottom: css.$v.spaceL }),
+      p: css.mix('body', { marginBottom: css.$v.spaceM}),
       div: {
         overflow: 'hidden',
         width: '100%',
@@ -40,8 +43,7 @@ export function GamePreview({
           width: '100%',
           height: '100%',
         },
-      },
-      button: css.mix('button'),
+      }
     },
     style || {}
   );
@@ -51,23 +53,20 @@ export function GamePreview({
       <div>{children}</div>
       <h2>{title}</h2>
       <p>{description}</p>
-      <button type="button">
-        Play
-        <Script data={{ source, index }}>
-          {({ el, data, $ }) => {
-            function start() {
-              el.$publish('modal:open', { frag: data.source });
-            }
+      <Script data={{ source, index }}>
+        {({ el, data, $ }) => {
+          function start() {
+            el.$publish('modal:open', { frag: data.source });
+          }
 
-            $.on(el, 'click', () => start());
+          $.on(el, 'click', () => start());
 
-            el.$subscribe('sys:randomgame', (val) => {
-              if (val !== data.index) return;
-              start();
-            });
-          }}
-        </Script>
-      </button>
+          el.$subscribe('sys:randomgame', (val) => {
+            if (val !== data.index) return;
+            start();
+          });
+        }}
+      </Script>
     </article>
   );
 }

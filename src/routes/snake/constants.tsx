@@ -11,5 +11,5 @@ export const PREVIEW = {
 
 export const CFG = {
   COLS: 15 /* Board Columns */,
-  ROWS: 15 /* Board Rows */,
+  ROWS: 20 /* Board Rows */,
 };

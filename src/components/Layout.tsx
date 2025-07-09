@@ -1,8 +1,9 @@
 import {css} from '../css';
 import { Footer } from './atoms/Footer';
+import { Background } from './atoms/Background';
 
 type LayoutOptions = {
-  children:JSX.Element;
+  children:any;
   title?:string;
 };
 
@@ -33,6 +34,7 @@ export function Layout ({children, title = "atomic-tetris"}:LayoutOptions) {
         background: css.$t.bg,
         color: css.$t.fg,
       })}>
+        <Background />
         {children}
         <Footer />
       </body>

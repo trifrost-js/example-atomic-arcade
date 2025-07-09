@@ -1,6 +1,7 @@
 import { CFG, css } from '~/css';
 import { GameCanvas } from './GameCanvas';
 import { type RelayEvents, Script } from '~/script';
+import { GameCountdown } from './GameCountdown';
 
 type GameOptions = {
   sound: RelayEvents['audio:register'];
@@ -21,6 +22,7 @@ export type GameStore = {
 
 export type GameEvents = {
   'game:evt:boot': void;
+  'game:evt:countdown': void;
 };
 
 export function Game({
@@ -50,6 +52,7 @@ export function Game({
     >
       <GameCanvas columns={columns} rows={rows} size={CFG.SIZE} />
       {children}
+      <GameCountdown evtStart={evtStart} />
       <div>
         <Script data={{ gameSound, evtStart, evtPause, evtOver }}>
           {({ el, data, $ }) => {
@@ -90,7 +93,9 @@ export function Game({
                 el.$publish(data.evtPause);
               } else if (e.key === 'r') {
                 isPaused = false;
-                el.$publish(data.evtStart);
+                el.$publish('audio:pause');
+                el.$publish(data.evtPause);
+                el.$publish('game:evt:countdown');
               }
             });
 

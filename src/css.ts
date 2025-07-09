@@ -22,7 +22,7 @@ export const css = createCss({
     fg: '#ffffff',
     board_bg: '#050b24',
     board_fg: '#ffffff',
-    board_grid: '#2B2B2B',
+    board_grid: '#3B3B3B',
     board_border: '#ffffff',
     panelBg: '#02080F',
     panelFg: '#FFFFFF',
@@ -37,6 +37,8 @@ export const css = createCss({
     keyCapSide1: '#d2d2d2',
     keyCapSide2: '#c2c2c2',
     overlayBg: 'rgba(12, 18, 32, .75)',
+    bgSynth: 'linear-gradient(to top, #0f0c29, #302b63, #24243e)',
+    bgSynthLines: 'repeating-linear-gradient(to right,rgba(255, 0, 150, 0.2) 0,rgba(255, 0, 150, 0.2) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(to top,rgba(0, 200, 255, 0.2) 0,rgba(0, 200, 255, 0.2) 1px,transparent 1px,transparent 40px)',
   },
   var: {
     fontSizeBody: '1.6rem',
@@ -101,6 +103,25 @@ export const css = createCss({
       duration: '200ms',
       easingFunction: 'ease-in-out',
     },
+    goldenGlow: {
+      keyframes: {
+        '0%': {
+          filter: 'drop-shadow(0 0 1px #fff8d1) brightness(1)',
+          transform: 'scale(1)',
+        },
+        '50%': {
+          filter: 'drop-shadow(0 0 5px #ffe066) brightness(1.3)',
+          transform: 'scale(1.08)',
+        },
+        '100%': {
+          filter: 'drop-shadow(0 0 1px #fff8d1) brightness(1)',
+          transform: 'scale(1)',
+        },
+      },
+      easingFunction: 'ease-in-out',
+      duration: '1000ms',
+      iterationCount: 'infinite',
+    },
   },
   definitions: (mod) => ({
     f: () => ({ display: 'flex' }),
@@ -111,6 +132,13 @@ export const css = createCss({
     fj_sb: () => ({ justifyContent: 'space-between' }),
     fh: () => ({ flexDirection: 'row' }),
     fv: () => ({ flexDirection: 'column' }),
+    cover: () => ({
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    }),
     title: () => ({
       fontFamily: mod.$v.fontFamilyHeader,
       fontSize: mod.$v.fontSizeTitle,

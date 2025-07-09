@@ -66,12 +66,8 @@ export async function routes<State extends Record<string, unknown>>(
                 </GamePreview>
               ))}
             </section>
-            <button
-              className={css.use('button', {
-                marginTop: 'calc(' + css.$v.spaceL + ' * 2)',
-              })}
-            >
-              Choose for me
+            <button className={css.use('linkButton', {marginTop: css.$v.spaceL})}>
+              I don't know what to choose
               <Script data={{ length: PREVIEWS.length }}>
                 {({ el, data, $ }) => {
                   $.on(el, 'click', () =>

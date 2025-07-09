@@ -29,6 +29,7 @@ export function GamePreview({
       padding: css.$v.spaceM,
       textAlign: 'center',
       cursor: 'crosshair',
+      boxShadow: '0 6px 10px 5px rgba(0, 0, 0, .3)',
       h2: css.mix('header', { marginBottom: css.$v.spaceM }),
       p: css.mix('body', { marginBottom: css.$v.spaceM}),
       div: {

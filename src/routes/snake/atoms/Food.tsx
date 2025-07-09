@@ -36,24 +36,47 @@ function Cherry() {
 function Banana() {
   return (
     <>
+      {/* Banana crescent */}
       <path
-        d="M4 20 C10 10, 20 8, 22 4"
-        fill="none"
-        stroke="#ffeb7a"
-        stroke-width="3"
-        stroke-linecap="round"
+        d="
+          M5 20
+          C2 12, 11 5, 18 6
+          C19 10, 10 16, 5 20
+          Z
+        "
+        fill="#ffeb7a"
       />
+
+      {/* Inner flesh shading */}
       <path
-        d="M4 20 C10 10, 20 8, 22 4"
+        d="
+          M6 19
+          C4 13, 11 6, 17 7
+          C18 10, 10 15, 6 19
+          Z
+        "
+        fill="#d8b945"
+      />
+
+      {/* Gloss streak */}
+      <path
+        d="M7 18 C9 13, 13 10, 15 9"
         fill="none"
-        stroke="#d8b945"
+        stroke="#fff8d1"
         stroke-width="1"
+        stroke-linecap="round"
+        stroke-dasharray="2,1"
       />
-      <circle cx="4" cy="20" r="1" fill="#fff8d1" />
-      <circle cx="22" cy="4" r="1" fill="#c49b41" />
+
+      {/* Peel tip */}
+      <circle cx="5" cy="20" r="1.5" fill="#fff8d1" />
+
+      {/* Stem */}
+      <rect x="17" y="5" width="2" height="3" fill="#c49b41" transform="rotate(-20 17 5)" />
     </>
   );
 }
+
 
 function Apple() {
   return (
@@ -75,7 +98,19 @@ function Orange() {
   return (
     <>
       <circle cx="12.5" cy="12.5" r="9" fill="#ffcb6b" />
-      <circle cx="12.5" cy="12.5" r="7" fill="#c49b41" />
+      <circle cx="12.5" cy="12.5" r="7.5" fill="#c49b41" />
+      {/* Peel texture segments */}
+      <path
+        d="M12.5 3.5 L12.5 21.5 M3.5 12.5 L21.5 12.5"
+        stroke="#ffcb6b"
+        stroke-width="1"
+      />
+      <path
+        d="M6 6 L19 19 M19 6 L6 19"
+        stroke="#ffcb6b"
+        stroke-width="0.75"
+      />
+      {/* Highlight */}
       <circle cx="10" cy="10" r="1.5" fill="#fff8d1" />
     </>
   );
@@ -85,12 +120,20 @@ function Lime() {
   return (
     <>
       <circle cx="12.5" cy="12.5" r="9" fill="#78ff78" />
-      <circle cx="12.5" cy="12.5" r="7" fill="#3bcc3b" />
+      <circle cx="12.5" cy="12.5" r="7.5" fill="#3bcc3b" />
+      {/* Wedge segmentation */}
       <path
-        d="M12.5 4 L12.5 21 M4 12.5 L21 12.5"
-        stroke="#3bcc3b"
+        d="M12.5 3.5 L12.5 21.5 M3.5 12.5 L21.5 12.5"
+        stroke="#78ff78"
+        strokeWidth="1"
+      />
+      <path
+        d="M6 6 L19 19 M19 6 L6 19"
+        stroke="#78ff78"
         stroke-width="0.75"
       />
+      {/* Zest */}
+      <circle cx="9" cy="9" r="1.25" fill="#fff8d1" />
     </>
   );
 }
@@ -98,13 +141,16 @@ function Lime() {
 function GoldenApple() {
   return (
     <>
-      {/* Outer ring */}
-      <circle cx="12.5" cy="13" r="8.5" fill="#ffe066" />
-      <circle cx="12.5" cy="13" r="6.5" fill="#f9c342" />
+      {/* Outer glow */}
+      <circle cx="12.5" cy="13" r="9" fill="#ffe066" />
+      <circle cx="12.5" cy="13" r="7" fill="#f9c342" />
+
+      {/* Shine + gloss */}
+      <circle cx="9.5" cy="10" r="1.75" fill="#fff8d1" />
+      <circle cx="11.5" cy="9.5" r="1" fill="#fff8d1" />
+
       {/* Stem */}
       <rect x="12" y="4" width="1.5" height="3" fill="#3bcc3b" />
-      {/* Gloss */}
-      <circle cx="10" cy="10" r="1.2" fill="#fff8d1" />
     </>
   );
 }
@@ -119,15 +165,18 @@ const TYPES = [
 
 export function Food () {
   const uid = css.cid();
-  const {growth, pix} = Math.random() < 0.1
+  const isGolden = Math.random() < 0.1;
+  const {growth, pix} = isGolden
     ? {growth: 2, pix: <GoldenApple />}
     : {growth: 1, pix: TYPES[Math.floor(Math.random() * TYPES.length)]()};
   const cls = css.use({
     position: 'absolute',
     imageRendering: 'pixelated',
     shapeRendering: 'crispEdges',
-    [css.attr('data-consumed')]: {
-      /* Todo */
+    ...isGolden && {
+      [css.not(css.attr('data-consumed'))]: {
+        ...css.animation('goldenGlow'),
+      }
     },
   });
 
@@ -156,10 +205,6 @@ export function Food () {
         if (uid !== data.uid) return;
         el.$publish('audio:fx', 'pong' + Math.ceil(Math.random() * 3));
         el.remove();
-        $.timedAttr(el, 'data-consumed', {
-          duration: 200,
-          after: () => el.remove(),
-        });
       });
 
       el.$subscribe('snake:gameover', () => el.remove());

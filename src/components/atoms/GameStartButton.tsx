@@ -35,12 +35,13 @@ export function GameStartButton(data: GameStartButtonOptions) {
 
           function setTimer() {
             clearTimer();
-            setInterval(() => data.$set('timer', data.timer - 1), 1000);
+            int = setInterval(() => data.$set('timer', data.timer - 1), 1000);
           }
 
           function start() {
-            el.$publish(data.eventStart);
+            el.$publish('game:evt:countdown');
             clearTimer();
+            el.setAttribute('data-hidden', '');
             counter.style.display = 'none';
           }
 
@@ -56,7 +57,14 @@ export function GameStartButton(data: GameStartButtonOptions) {
           /* On game over, enable our button again */
           el.$subscribe(data.eventOver, () => {
             $.clear(el);
+            el.removeAttribute('data-hidden');
             el.textContent = 'Play again?';
+          });
+
+          el.$subscribe('game:evt:countdown', () => {
+            counter.style.display = 'none';
+            clearTimer();
+            el.setAttribute('data-hidden', '');
           });
 
           /* On game start, hide element */

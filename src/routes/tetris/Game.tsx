@@ -90,7 +90,7 @@ export function TetrisGame() {
               Array(BOARD_COLS).fill(0)
             );
             let difficulty = DIFFICULTIES.beginner;
-            let BOARD_DELTA = 1000;
+            let BOARD_DELTA = difficulty.speed_delta;
             let tick: number | null = null;
             let ticks = 0;
             let isPaused = false;

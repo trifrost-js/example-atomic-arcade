@@ -1,11 +1,15 @@
 import {css} from "~/css";
 import {Module, Script} from "~/script";
 
-export type ModalEvents = {
+type ModalEvents = {
   'modal:open': {frag:string};
   'modal:replace': {frag:string};
   'modal:close': void;
 };
+
+declare global {
+  interface AtomicRelay extends ModalEvents {}
+}
 
 export function Modal () {
   const cls = css.use('f', 'fv', 'fa_c', 'fj_c', {

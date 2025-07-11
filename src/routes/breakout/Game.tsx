@@ -16,7 +16,7 @@ import { GameSidebar } from '~/components/atoms/GameSidebar';
 import { KeyArrowsHorizontal } from '~/components/atoms/Keys';
 
 /* Defines all event types the Breakout game will use. */
-export type BreakoutGameEvents = {
+type BreakoutGameEvents = {
   'breakout:start': void;
   'breakout:pause': void;
   'breakout:gameover': void;
@@ -38,6 +38,10 @@ export type BreakoutGameEvents = {
   'breakout:evt:brick:shift': void;
   'breakout:cleared': void;
 };
+
+declare global {
+  interface AtomicRelay extends BreakoutGameEvents {}
+}
 
 export function BreakoutGame() {
   const gameBoardId = css.cid();

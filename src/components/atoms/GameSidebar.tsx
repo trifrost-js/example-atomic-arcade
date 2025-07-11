@@ -1,12 +1,11 @@
 import { css } from '~/css';
-import { type RelayEvents } from '~/script';
 import { GameStartButton } from './GameStartButton';
 
 type GameSidebarOptions = {
   width?: number;
   children: any;
-  evtStart: keyof RelayEvents;
-  evtEnd: keyof RelayEvents;
+  evtStart: keyof AtomicRelay;
+  evtEnd: keyof AtomicRelay;
 };
 
 export function GameSidebar({

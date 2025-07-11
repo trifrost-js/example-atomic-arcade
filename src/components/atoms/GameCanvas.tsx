@@ -5,6 +5,10 @@ export type CanvasEvents = {
   'canvas:draw': { fn?: (ctx: CanvasRenderingContext2D) => void };
 };
 
+declare global {
+  interface AtomicRelay extends CanvasEvents {}
+}
+
 type CanvasOptions = {
   columns: number;
   rows: number;

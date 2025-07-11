@@ -1,6 +1,6 @@
 import { Module } from '~/script';
 
-export type AudioPlayerEvents = {
+type AudioPlayerEvents = {
   'audio:register': { track: string[]; fx: Record<string, string> };
   'audio:enable': void;
   'audio:disable': void;
@@ -10,6 +10,10 @@ export type AudioPlayerEvents = {
   'audio:pause': void;
   'audio:stop': void;
 };
+
+declare global {
+  interface AtomicRelay extends AudioPlayerEvents {}
+}
 
 export function AudioPlayer() {
   return (

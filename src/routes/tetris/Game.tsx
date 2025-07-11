@@ -13,7 +13,7 @@ import { GameSidebar } from '~/components/atoms/GameSidebar';
 import { KeyArrowsAll, KeySpacebar } from '~/components/atoms/Keys';
 
 /* Defines all event types the Tetris game will use. */
-export type TetrisGameEvents = {
+type TetrisGameEvents = {
   'tetris:start': void;
   'tetris:pause': void;
   'tetris:rowclearend': void;
@@ -31,6 +31,10 @@ export type TetrisGameEvents = {
   };
   'tetris:evt:land': { position: number[][] };
 };
+
+declare global {
+  interface AtomicRelay extends TetrisGameEvents {}
+}
 
 export function TetrisGame() {
   return (

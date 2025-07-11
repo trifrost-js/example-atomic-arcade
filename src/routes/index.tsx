@@ -14,9 +14,13 @@ import { AudioPlayer } from '~/components/modules/AudioPlayer';
 
 const PREVIEWS = [BreakoutPreview, TetrisPreview, SnakePreview];
 
-export type SystemEvents = {
+type SystemEvents = {
   'sys:randomgame': number;
 };
+
+declare global {
+  interface AtomicRelay extends SystemEvents {}
+}
 
 export async function routes<State extends Record<string, unknown>>(
   r: Router<State>

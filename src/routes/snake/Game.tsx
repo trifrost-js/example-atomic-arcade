@@ -14,7 +14,7 @@ import { GameModal } from '~/components/atoms/GameModal';
 type Dir = 'up' | 'down' | 'left' | 'right';
 
 /* Defines all event types the Snake game will use. */
-export type SnakeGameEvents = {
+type SnakeGameEvents = {
   'snake:start': void;
   'snake:pause': void;
   'snake:gameover': void;
@@ -25,6 +25,10 @@ export type SnakeGameEvents = {
     fn: (pos: { row: number; col: number }) => void;
   };
 };
+
+declare global {
+  interface AtomicRelay extends SnakeGameEvents {}
+}
 
 export function SnakeGame() {
   return (

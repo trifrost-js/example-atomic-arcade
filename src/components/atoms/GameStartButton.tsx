@@ -1,10 +1,10 @@
 import { css } from '~/css';
-import { Script, type RelayEvents } from '~/script';
+import { Script } from '~/script';
 
 type GameStartButtonOptions = {
   timer: number;
-  eventStart: keyof RelayEvents;
-  eventOver: keyof RelayEvents;
+  eventStart: keyof AtomicRelay;
+  eventOver: keyof AtomicRelay;
   style?: Record<string, unknown>;
 };
 

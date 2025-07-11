@@ -1,8 +1,8 @@
 import { css } from '~/css';
-import {type RelayEvents, Script} from '~/script';
+import {Script} from '~/script';
 
 type GameCountdownProps = {
-  evtStart:keyof RelayEvents;
+  evtStart:keyof AtomicRelay;
 };
 
 export function GameCountdown ({evtStart}:GameCountdownProps) {

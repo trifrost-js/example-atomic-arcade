@@ -1,29 +1,34 @@
 import { CFG, css } from '~/css';
 import { GameCanvas } from './GameCanvas';
-import { type RelayEvents, Script } from '~/script';
+import { Script } from '~/script';
 import { GameCountdown } from './GameCountdown';
 
 type GameOptions = {
-  sound: RelayEvents['audio:register'];
+  sound: AtomicRelay['audio:register'];
   columns: number;
   rows: number;
   children: any;
-  evtStart: keyof RelayEvents;
-  evtPause: keyof RelayEvents;
-  evtOver: keyof RelayEvents;
+  evtStart: keyof AtomicRelay;
+  evtPause: keyof AtomicRelay;
+  evtOver: keyof AtomicRelay;
 };
 
-export type GameStore = {
+type GameStore = {
   gameConfig: {
     music: 'on' | 'off';
     difficulty: 'beginner' | 'intermediate' | 'expert';
   };
 };
 
-export type GameEvents = {
+type GameEvents = {
   'game:evt:boot': void;
   'game:evt:countdown': void;
 };
+
+declare global {
+  interface AtomicRelay extends GameEvents {}
+  interface AtomicStore extends GameStore {}
+}
 
 export function Game({
   sound,

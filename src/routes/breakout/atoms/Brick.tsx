@@ -42,7 +42,7 @@ export function Brick({
               respond(true);
               transient = true;
               el.$publish('breakout:evt:brick:cleared');
-              el.$publish('audio:fx', 'pong' + Math.ceil(Math.random() * 4));
+              $.audio.fx('pong' + Math.ceil(Math.random() * 4));
               $.timedAttr(el, 'data-destroying', {
                 duration: 200,
                 after: () => el?.remove(),

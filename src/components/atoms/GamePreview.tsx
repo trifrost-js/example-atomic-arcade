@@ -56,15 +56,11 @@ export function GamePreview({
       <p>{description}</p>
       <Script data={{ source, index }}>
         {({ el, data, $ }) => {
-          function start() {
-            el.$publish('modal:open', { frag: data.source });
-          }
-
-          $.on(el, 'click', () => start());
+          $.on(el, 'click', () => $.modal.open({frag: data.source}));
 
           el.$subscribe('sys:randomgame', (val) => {
             if (val !== data.index) return;
-            start();
+            $.modal.open({frag: data.source});
           });
         }}
       </Script>

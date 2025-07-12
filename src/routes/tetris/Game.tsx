@@ -111,7 +111,7 @@ export function TetrisGame() {
                 `/tetris/rowclear?top=${top}&rows=${cleared.length}`
               ).then((res) => {
                 if (res.ok && res.content) el.appendChild(res.content);
-                el.$publish('audio:fx', 'pong' + cleared.length);
+                $.audio.fx('pong' + cleared.length);
               });
 
               for (let i = cleared.length - 1; i >= 0; i--)

@@ -2,9 +2,10 @@ import { CFG, css } from '~/css';
 import { GameCanvas } from './GameCanvas';
 import { Script } from '~/script';
 import { GameCountdown } from './GameCountdown';
+import { type SoundRegister } from '../modules/AudioPlayer';
 
 type GameOptions = {
-  sound: AtomicRelay['audio:register'];
+  sound: SoundRegister;
   columns: number;
   rows: number;
   children: any;
@@ -64,12 +65,12 @@ export function Game({
             let isPaused = false;
 
             el.$subscribe(data.evtStart, () => {
-              el.$publish('audio:restart');
+              $.audio.restart();
             });
 
             el.$subscribe(data.evtOver, () => {
-              el.$publish('audio:pause');
-              el.$publish('audio:fx', 'over');
+              $.audio.pause();
+              $.audio.fx('over');
             });
 
             el.$subscribe('game:evt:boot', () => {
@@ -80,11 +81,11 @@ export function Game({
               el.$publish('canvas:draw');
 
               /* Set music state */
-              el.$publish(
-                $.storeGet('gameConfig').music === 'on'
-                  ? 'audio:enable'
-                  : 'audio:disable'
-              );
+              if ($.storeGet('gameConfig').music === 'on') {
+                $.audio.enable();
+              } else {
+                $.audio.disable();
+              }
             });
 
             /**
@@ -94,20 +95,21 @@ export function Game({
             const keydownListener = $.on(document, 'keydown', (e) => {
               if (e.key === 'p') {
                 isPaused = !isPaused;
-                el.$publish(isPaused ? 'audio:pause' : 'audio:play');
+                if (isPaused) $.audio.pause();
+                else $.audio.play();
                 el.$publish(data.evtPause);
               } else if (e.key === 'r') {
                 isPaused = false;
-                el.$publish('audio:pause');
+                $.audio.pause();
                 el.$publish(data.evtPause);
                 el.$publish('game:evt:countdown');
               }
             });
 
-            el.$publish('audio:register', data.gameSound);
+            $.audio.register(data.gameSound);
 
             el.$unmount = () => {
-              el.$publish('audio:stop');
+              $.audio.stop();
               keydownListener();
             };
           }}

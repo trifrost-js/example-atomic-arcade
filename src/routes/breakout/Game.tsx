@@ -105,7 +105,7 @@ export function BreakoutGame() {
 
             el.$subscribe('breakout:cleared', () => {
               loadBoard();
-              el.$publish('audio:fx', 'cleared');
+              $.audio.fx('cleared');
             });
           }}
         </Script>

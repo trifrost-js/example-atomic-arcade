@@ -1,7 +1,7 @@
 import { css } from '~/css';
 import { Script } from '~/script';
 
-export type CanvasEvents = {
+type CanvasEvents = {
   'canvas:draw': { fn?: (ctx: CanvasRenderingContext2D) => void };
 };
 

@@ -203,7 +203,7 @@ export function Food () {
 
       el.$subscribeOnce('snake:food:consume', ({uid}) => {
         if (uid !== data.uid) return;
-        el.$publish('audio:fx', 'pong' + Math.ceil(Math.random() * 3));
+        $.audio.fx('pong' + Math.ceil(Math.random() * 3));
         el.remove();
       });
 

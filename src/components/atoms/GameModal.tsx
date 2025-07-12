@@ -1,5 +1,5 @@
 import { CFG, css } from '~/css';
-import { ModalClose } from '../modules/Modal';
+import { ModalClose } from './ModalClose';
 
 type GameModalOptions = {
   columns: number;

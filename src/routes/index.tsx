@@ -8,8 +8,9 @@ import { PREVIEW as TetrisPreview } from './tetris/constants';
 import { SnakeRouter } from './snake/routes';
 import { PREVIEW as SnakePreview } from './snake/constants';
 import { GamePreview } from '~/components/atoms/GamePreview';
+import { ModalClose } from '~/components/atoms/ModalClose';
 import { Script } from '~/script';
-import { Modal, ModalClose } from '~/components/modules/Modal';
+import { Modal } from '~/components/modules/Modal';
 import { AudioPlayer } from '~/components/modules/AudioPlayer';
 
 const PREVIEWS = [BreakoutPreview, TetrisPreview, SnakePreview];
@@ -42,9 +43,7 @@ export async function routes<State extends Record<string, unknown>>(
                 What's this?
                 <Script>
                   {({ el, $ }) => {
-                    $.on(el, 'click', () =>
-                      el.$publish('modal:open', { frag: '/about' })
-                    );
+                    $.on(el, 'click', () => $.modal.open({frag: '/about'}));
                   }}
                 </Script>
               </button>
@@ -83,9 +82,6 @@ export async function routes<State extends Record<string, unknown>>(
                 }}
               </Script>
             </button>
-            {/* Globals */}
-            <Modal />
-            <AudioPlayer />
           </main>
         </Layout>
       );

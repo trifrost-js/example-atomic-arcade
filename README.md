@@ -1,5 +1,7 @@
 # 🎮 Atomic Arcade
 
+[View Live](https://arcade.trifrost.dev)
+
 **Atomic Arcade** is a retro-inspired, fragment-powered micro-arcade built using the [TriFrost Atomic Runtime](https://trifrost.dev).
 
 It showcases zero-bundle, server-first game delivery, each game loads as a fragment when needed, no more, no less.

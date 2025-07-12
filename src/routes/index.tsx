@@ -10,8 +10,6 @@ import { PREVIEW as SnakePreview } from './snake/constants';
 import { GamePreview } from '~/components/atoms/GamePreview';
 import { ModalClose } from '~/components/atoms/ModalClose';
 import { Script } from '~/script';
-import { Modal } from '~/components/modules/Modal';
-import { AudioPlayer } from '~/components/modules/AudioPlayer';
 
 const PREVIEWS = [BreakoutPreview, TetrisPreview, SnakePreview];
 

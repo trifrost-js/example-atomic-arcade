@@ -12,16 +12,16 @@
   "license": "MIT",
   "homepage": "https://arcade.trifrost.dev",
   "dependencies": {
-    "@trifrost/core": "^0.52.0"
+    "@trifrost/core": "^0.54.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250705.0",
-    "eslint": "^9",
+    "@cloudflare/workers-types": "^4.20250715.0",
+    "eslint": "^9.31.0",
     "eslint-config-prettier": "^10",
     "eslint-plugin-prettier": "^5",
     "prettier": "^3",
     "typescript": "^5",
-    "typescript-eslint": "^8",
-    "wrangler": "^4"
+    "typescript-eslint": "^8.37.0",
+    "wrangler": "^4.24.3"
   }
 }

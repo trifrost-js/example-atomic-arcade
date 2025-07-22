@@ -237,7 +237,7 @@ export function TetrisGame() {
 
             el.$subscribe('tetris:gameover', () => clearTimer());
 
-            const keydownhandler = $.on(document, 'keydown', (e) => {
+            $.on(document, 'keydown', (e) => {
               if (isPaused || !tick) return;
               let dir: TetrisGameEvents['tetris:evt:move'] | null = null;
               switch (e.key) {
@@ -260,10 +260,7 @@ export function TetrisGame() {
               if (dir) el.$publish('tetris:evt:move', dir);
             });
 
-            el.$unmount = () => {
-              keydownhandler();
-              clearTimer();
-            };
+            el.$unmount = () => clearTimer();
           }}
         </Script>
       </Game>

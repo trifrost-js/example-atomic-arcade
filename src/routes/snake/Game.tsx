@@ -271,7 +271,7 @@ export function SnakeGame() {
               clearSegmentTimer();
             });
 
-            const keyboardListener = $.on(document, 'keydown', (e) => {
+            $.on(document, 'keydown', (e) => {
               if (isPaused) return;
               switch (e.key) {
                 case 'ArrowUp':
@@ -288,7 +288,6 @@ export function SnakeGame() {
             el.$unmount = () => {
               clearTimer();
               clearSegmentTimer();
-              keyboardListener();
             };
           }}
         </Script>

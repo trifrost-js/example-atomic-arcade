@@ -92,7 +92,7 @@ export function Game({
              * MARK: Init
              */
 
-            const keydownListener = $.on(document, 'keydown', (e) => {
+            $.on(document, 'keydown', (e) => {
               if (e.key === 'p') {
                 isPaused = !isPaused;
                 if (isPaused) $.audio.pause();
@@ -108,10 +108,7 @@ export function Game({
 
             $.audio.register(data.gameSound);
 
-            el.$unmount = () => {
-              $.audio.stop();
-              keydownListener();
-            };
+            el.$unmount = () => $.audio.stop();
           }}
         </Script>
       </div>

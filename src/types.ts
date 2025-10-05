@@ -6,8 +6,7 @@ export type Env = {
    * @see https://www.trifrost.dev/docs/context-state-management#type-safe-context-definitions
    */
   ASSETS: Fetcher;
-  TRIFROST_INGESTOR_KEY: string;
-  TRIFROST_INGESTOR_CLIENT: string;
+  UPTRACE_DSN: string;
 };
 
 export type Context<State extends Record<string, unknown> = {}> =
